@@ -225,11 +225,9 @@
   }
 
   &--1 {
-    top: 14%;
-    transform: translate(-50%, 0);
-    width: min(800px, 92vw);
-    text-align: left;
-    padding-left: clamp(20px, 5vw, 80px);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;   // 預設可見，GSAP 在 scroll 前不動它
   }
 
   &--2 {

@@ -37,7 +37,7 @@ export function initScrollStory(container: HTMLElement) {
 
   gsap.set(videoScreen, { scale: 0, opacity: 0 })
   gsap.set(mktShapes, { scale: 0, opacity: 0 })
-  gsap.set(text1, { opacity: 0, y: -20 })  // 從上方滑入
+  gsap.set(text1, { opacity: 1, y: 0 })  // 進入頁面就可見，不等 scroll
   gsap.set(text2, { opacity: 0, y: 40 })
 
   // Master timeline (progress 0→1 driven by scroll)
@@ -72,11 +72,11 @@ export function initScrollStory(container: HTMLElement) {
     duration: 0.28,
   }, 0.20)
 
-  // Text overlay 1 — 從一開始就出現（0%），在元素開始飛入時同步淡入
-  tl.fromTo(text1,
-    { opacity: 0, y: -20 },
-    { opacity: 1, y: 0, ease: 'power2.out', duration: 0.12 },
-    0.02,
+  // Text 1 已在畫面上（gsap.set opacity:1），scroll 開始後隨元素飛入一起淡出
+  // 在 Act 1 尾段（約 15%）開始淡出，元素還在飛的時候文字就退場
+  tl.to(text1,
+    { opacity: 0, y: -40, ease: 'power2.in', duration: 0.12 },
+    0.15,
   )
 
   // ─────────────────────────────────────────────────────────────
@@ -92,8 +92,7 @@ export function initScrollStory(container: HTMLElement) {
     duration: 0.14,
   }, 0.50)
 
-  // Text 1 fades out — 往上飄走，配合元素聚攏動作
-  tl.to(text1, { opacity: 0, y: -30, ease: 'power2.in', duration: 0.08 }, 0.46)
+  // （text1 已在 0.15 淡出，這裡不需要重複）
 
   // Video screen bursts out
   tl.fromTo(videoScreen,
