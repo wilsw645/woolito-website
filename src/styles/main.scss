@@ -1,0 +1,34 @@
+@use 'variables' as *;
+@use 'reset';
+@use 'navbar';
+@use 'hero';
+@use 'portfolio';
+@use 'contact';
+@use 'footer';
+
+// Utilities
+.container {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 80px);
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $color-primary;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,28 @@
+// Brand Colors
+$color-primary:   #FFD25E;
+$color-gray-100:  #DAE5E5;
+$color-gray-200:  #BCCCCC;
+$color-gray-400:  #708083;
+$color-gray-600:  #515D60;
+$color-gray-700:  #3E4749;
+$color-gray-800:  #353A3A;
+$color-gray-900:  #202120;
+$color-bg:        $color-gray-900;
+$color-text:      #FFFFFF;
+
+// Typography
+$font-sans: 'Noto Sans TC', 'Helvetica Neue', Arial, sans-serif;
+$font-display: 'Noto Sans TC', 'Helvetica Neue', Arial, sans-serif;
+
+// Spacing
+$container-max:   1280px;
+$section-padding: clamp(60px, 8vw, 120px);
+
+// Breakpoints
+$bp-tablet:  768px;
+$bp-desktop: 1024px;
+$bp-wide:    1280px;
+
+// Transitions
+$ease-out:    cubic-bezier(0.25, 1, 0.5, 1);
+$ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);

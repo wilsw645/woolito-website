@@ -1,0 +1,255 @@
+@use 'variables' as *;
+
+.portfolio {
+  padding: $section-padding 0;
+  background: $color-bg;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 80px;
+    padding: 0 40px;
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin-top: 16px;
+      color: rgba($color-text, 0.6);
+      font-size: 1.1rem;
+    }
+  }
+}
+
+// Curation Block
+.curation {
+  margin-bottom: 80px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 clamp(20px, 5vw, 80px);
+    margin-bottom: 32px;
+    gap: 20px;
+  }
+
+  &__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__accent {
+    width: 6px;
+    height: 100%;
+    min-height: 40px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    transform: translateX(-30px);
+    will-change: opacity, transform;
+  }
+
+  &__subtitle {
+    margin-top: 6px;
+    font-size: 0.9rem;
+    color: rgba($color-text, 0.5);
+    font-weight: 400;
+  }
+
+  &__see-more {
+    white-space: nowrap;
+    font-size: 0.85rem;
+    color: rgba($color-text, 0.5);
+    border-bottom: 1px solid rgba($color-text, 0.2);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+
+    &:hover {
+      color: $color-primary;
+      border-color: $color-primary;
+    }
+  }
+
+  // Swiper carousel
+  .swiper {
+    overflow: visible;
+    padding: 0 clamp(20px, 5vw, 80px) 40px;
+
+    &-slide {
+      width: 280px;
+
+      @media (min-width: $bp-tablet) {
+        width: 320px;
+      }
+    }
+  }
+}
+
+// Work Card
+.work-card {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
+  background: $color-gray-800;
+  position: relative;
+  opacity: 0;
+  transform: translateY(40px);
+  will-change: opacity, transform;
+  transition: transform 0.3s $ease-out, box-shadow 0.3s $ease-out;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+    .work-card__overlay {
+      opacity: 1;
+    }
+
+    .work-card__play {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+
+  &__thumb {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba($color-bg, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &__play {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: $color-primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s $ease-out;
+
+    &::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-top: 9px solid transparent;
+      border-bottom: 9px solid transparent;
+      border-left: 16px solid $color-bg;
+      margin-left: 3px;
+    }
+  }
+
+  &__info {
+    padding: 16px;
+  }
+
+  &__title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: $color-text;
+  }
+
+  &__client {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: rgba($color-text, 0.4);
+  }
+}
+
+// Video Modal
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+
+  &.is-open {
+    pointer-events: all;
+  }
+
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba($color-bg, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    width: min(860px, 95vw);
+    will-change: transform, opacity;
+  }
+
+  &__video-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    background: $color-gray-900;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+
+    iframe,
+    video {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: -48px;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    color: rgba($color-text, 0.6);
+    font-size: 1.5rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}

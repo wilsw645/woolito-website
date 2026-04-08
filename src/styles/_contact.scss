@@ -1,0 +1,123 @@
+@use 'variables' as *;
+
+.contact {
+  padding: $section-padding clamp(20px, 5vw, 80px);
+  background: $color-gray-800;
+  position: relative;
+  overflow: hidden;
+
+  // Decorative glow
+  &::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba($color-primary, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  &__inner {
+    max-width: $container-max;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+
+    @media (max-width: $bp-tablet) {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
+  &__text {
+    opacity: 0;
+    transform: translateY(30px);
+    will-change: opacity, transform;
+  }
+
+  &__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $color-primary;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  &__desc {
+    color: rgba($color-text, 0.6);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  &__links {
+    opacity: 0;
+    transform: translateY(30px);
+    will-change: opacity, transform;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+    border-radius: 12px;
+    background: rgba($color-gray-700, 0.5);
+    border: 1px solid rgba($color-gray-600, 0.4);
+    transition: border-color 0.2s, background 0.2s;
+
+    &:hover {
+      border-color: rgba($color-primary, 0.4);
+      background: rgba($color-gray-700, 0.8);
+    }
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: rgba($color-primary, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  &__item-text {
+    h4 {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba($color-text, 0.4);
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+
+    a, p {
+      font-size: 1rem;
+      font-weight: 600;
+      color: $color-text;
+      transition: color 0.2s;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+}

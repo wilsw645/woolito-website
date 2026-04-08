@@ -1,0 +1,269 @@
+@use 'variables' as *;
+
+.hero {
+  &-scroll-container {
+    height: 500vh;
+    position: relative;
+  }
+
+  &-canvas {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: radial-gradient(
+      ellipse at center,
+      rgba($color-gray-800, 0.8) 0%,
+      $color-bg 70%
+    );
+  }
+
+  &-scene {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+}
+
+// Floating SVG elements
+.scene-el {
+  position: absolute;
+  will-change: transform, opacity;
+  pointer-events: none;
+
+  &--circle {
+    border-radius: 50%;
+    background: $color-primary;
+  }
+
+  &--square {
+    background: $color-gray-600;
+  }
+
+  &--ring {
+    border-radius: 50%;
+    border: 3px solid $color-primary;
+    background: transparent;
+  }
+
+  &--triangle {
+    width: 0;
+    height: 0;
+    background: transparent;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 35px solid $color-gray-400;
+  }
+
+  &--dot {
+    border-radius: 50%;
+    background: $color-gray-200;
+  }
+
+  &--line {
+    background: rgba($color-primary, 0.6);
+    border-radius: 4px;
+  }
+
+  &--letter {
+    font-family: $font-display;
+    font-weight: 900;
+    color: $color-primary;
+    font-size: 3rem;
+    opacity: 0.15;
+  }
+
+  &--play {
+    width: 0;
+    height: 0;
+    background: transparent;
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid transparent;
+    border-left: 26px solid $color-primary;
+  }
+}
+
+// Video screen at center
+.video-screen {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: min(720px, 90vw);
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: $color-gray-800;
+  opacity: 0;
+  will-change: transform, opacity;
+  box-shadow: 0 0 60px rgba($color-primary, 0.2), 0 40px 80px rgba(0, 0, 0, 0.6);
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, $color-gray-800 0%, $color-gray-700 100%);
+    color: $color-primary;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    gap: 12px;
+
+    .play-icon {
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-left: 20px solid $color-primary;
+    }
+  }
+}
+
+// Marketing material shapes (post-explosion)
+.mkt-shape {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  will-change: transform, opacity;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+  &--social {
+    width: 140px;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, $color-gray-700, $color-gray-800);
+    border: 1px solid rgba($color-primary, 0.3);
+  }
+
+  &--banner {
+    width: 280px;
+    height: 70px;
+    background: linear-gradient(90deg, $color-gray-700, $color-gray-800);
+    border: 1px solid rgba($color-gray-400, 0.3);
+  }
+
+  &--brochure {
+    width: 100px;
+    height: 140px;
+    background: linear-gradient(180deg, $color-gray-700, $color-gray-800);
+    border: 1px solid rgba($color-gray-200, 0.2);
+  }
+
+  &--reel {
+    width: 80px;
+    height: 140px;
+    background: $color-gray-700;
+    border: 1px solid rgba($color-primary, 0.2);
+    border-radius: 12px;
+  }
+
+  &--email {
+    width: 200px;
+    height: 130px;
+    background: $color-gray-800;
+    border: 1px solid rgba($color-gray-400, 0.3);
+    border-radius: 6px;
+  }
+
+  // Add inner mock content
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 4px;
+    background: rgba($color-primary, 0.08);
+  }
+}
+
+// Text overlays
+.hero-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  width: min(600px, 90vw);
+  will-change: opacity, transform;
+
+  &__main {
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.3;
+    color: $color-text;
+    letter-spacing: -0.01em;
+
+    em {
+      color: $color-primary;
+      font-style: normal;
+    }
+  }
+
+  &__sub {
+    margin-top: 16px;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: rgba($color-text, 0.7);
+    font-weight: 400;
+  }
+
+  &--1 {
+    // positioned toward upper-center during convergence phase
+  }
+
+  &--2 {
+    // positioned at center during explosion phase
+  }
+}
+
+// Scroll indicator
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 1;
+  will-change: opacity;
+
+  span {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba($color-text, 0.4);
+  }
+
+  &__arrow {
+    width: 24px;
+    height: 24px;
+    border-right: 2px solid rgba($color-primary, 0.5);
+    border-bottom: 2px solid rgba($color-primary, 0.5);
+    transform: rotate(45deg);
+    animation: bounce-down 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes bounce-down {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(6px); }
+}
