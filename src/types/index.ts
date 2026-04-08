@@ -6,6 +6,7 @@ export interface WorkCard {
   videoUrl: string
   videoType: 'youtube' | 'local'
   tags?: string[]
+  featured?: boolean
 }
 
 export interface CurationTheme {

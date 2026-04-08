@@ -6,7 +6,7 @@ export const portfolioThemes: CurationTheme[] = [
     title: '永續報告書變成動畫',
     subtitle: '枯燥的 ESG 數據，搖身一變成吸睛影片',
     accentColor: '#FFD25E',
-    seeMoreUrl: '/portfolio.html#esg',
+    seeMoreUrl: '/portfolio/esg.html',
     cards: [
       {
         id: 'esg-1',
@@ -15,6 +15,7 @@ export const portfolioThemes: CurationTheme[] = [
         thumbnail: 'https://placehold.co/400x300/202120/FFD25E?text=ESG+1',
         videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
         videoType: 'youtube',
+        featured: true,
       },
       {
         id: 'esg-2',
@@ -55,7 +56,7 @@ export const portfolioThemes: CurationTheme[] = [
     title: '老品牌迸出新滋味',
     subtitle: '傳統品牌，用動畫重新詮釋品牌精神',
     accentColor: '#708083',
-    seeMoreUrl: '/portfolio.html#heritage',
+    seeMoreUrl: '/portfolio/heritage.html',
     cards: [
       {
         id: 'her-1',
@@ -64,6 +65,7 @@ export const portfolioThemes: CurationTheme[] = [
         thumbnail: 'https://placehold.co/400x300/353A3A/DAE5E5?text=品牌+1',
         videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
         videoType: 'youtube',
+        featured: true,
       },
       {
         id: 'her-2',
@@ -96,7 +98,7 @@ export const portfolioThemes: CurationTheme[] = [
     title: '產品介紹更清楚',
     subtitle: '複雜功能，動畫一看就懂',
     accentColor: '#BCCCCC',
-    seeMoreUrl: '/portfolio.html#product',
+    seeMoreUrl: '/portfolio/product.html',
     cards: [
       {
         id: 'prod-1',
@@ -105,6 +107,7 @@ export const portfolioThemes: CurationTheme[] = [
         thumbnail: 'https://placehold.co/400x300/3E4749/BCCCCC?text=產品+1',
         videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
         videoType: 'youtube',
+        featured: true,
       },
       {
         id: 'prod-2',
@@ -137,7 +140,7 @@ export const portfolioThemes: CurationTheme[] = [
     title: '政令宣導不無聊',
     subtitle: '公部門訊息，動畫讓民眾秒懂',
     accentColor: '#DAE5E5',
-    seeMoreUrl: '/portfolio.html#gov',
+    seeMoreUrl: '/portfolio/gov.html',
     cards: [
       {
         id: 'gov-1',
@@ -146,6 +149,7 @@ export const portfolioThemes: CurationTheme[] = [
         thumbnail: 'https://placehold.co/400x300/515D60/DAE5E5?text=宣導+1',
         videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
         videoType: 'youtube',
+        featured: true,
       },
       {
         id: 'gov-2',
@@ -182,3 +186,8 @@ export const portfolioThemes: CurationTheme[] = [
     ],
   },
 ]
+
+// 各主題精選（每個主題取 featured:true 的那張）
+export const featuredCards = portfolioThemes.flatMap(t =>
+  t.cards.filter(c => c.featured).map(c => ({ ...c, themeTitle: t.title }))
+)

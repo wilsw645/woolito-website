@@ -2,14 +2,12 @@ import '@/styles/main.scss'
 
 import { initLenis } from '@/animation/lenis-config'
 import { initNavBar } from '@/components/NavBar'
-import { initHeroSection } from '@/sections/hero/HeroSection'
-import { initPortfolioSection } from '@/sections/portfolio/PortfolioSection'
+import { initThemePage } from '@/sections/portfolio/ThemePage'
 import { initVideoModal } from '@/sections/portfolio/VideoModal'
 import { initContactSection } from '@/sections/contact/ContactSection'
 
 initLenis()
 initNavBar()
-initHeroSection()
-initPortfolioSection()   // 首頁也有 4 策展區塊
+initThemePage()
 initVideoModal()
 initContactSection()

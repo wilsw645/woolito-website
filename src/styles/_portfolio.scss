@@ -21,6 +21,32 @@
       font-size: 1.1rem;
     }
   }
+
+  &__more {
+    text-align: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  &__more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 36px;
+    border: 1.5px solid rgba($color-primary, 0.5);
+    border-radius: 999px;
+    color: $color-primary;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    transition: background 0.25s $ease-out, border-color 0.25s, color 0.25s;
+
+    &:hover {
+      background: $color-primary;
+      border-color: $color-primary;
+      color: $color-bg;
+    }
+  }
 }
 
 // Curation Block

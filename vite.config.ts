@@ -11,8 +11,12 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        portfolio: resolve(__dirname, 'portfolio.html'),
+        main:              resolve(__dirname, 'index.html'),
+        portfolio:         resolve(__dirname, 'portfolio.html'),
+        'theme-esg':       resolve(__dirname, 'portfolio/esg.html'),
+        'theme-heritage':  resolve(__dirname, 'portfolio/heritage.html'),
+        'theme-product':   resolve(__dirname, 'portfolio/product.html'),
+        'theme-gov':       resolve(__dirname, 'portfolio/gov.html'),
       },
     },
   },

@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>作品集 — Woolito Animation</title>
-    <meta name="description" content="Woolito Animation 完整作品集，涵蓋永續報告書動畫、品牌影片、產品說明、政令宣導等。" />
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,45 +22,26 @@
       </nav>
     </header>
 
-    <!-- Page Header -->
-    <div style="padding: 130px clamp(20px,5vw,80px) 60px; background: var(--bg, #202120);">
-      <span class="section-label">作品集</span>
-      <h1 style="font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;letter-spacing:-0.02em;margin-top:12px;">
-        我們做過的<br />讓你看見
-      </h1>
-    </div>
+    <main data-theme="heritage" aria-label="主題作品集">
 
-    <!-- 精選作品 -->
-    <section id="featured" aria-label="精選作品">
-      <div class="featured__header container">
-        <span class="section-label">精選作品</span>
-        <h2>每個主題的代表作</h2>
-        <p>來自四大服務類型的精選案例</p>
+      <!-- Theme hero header -->
+      <div class="theme-hero">
+        <div class="theme-hero__accent"></div>
+        <div class="theme-hero__text">
+          <a href="/portfolio.html" class="theme-hero__back">← 回作品集</a>
+          <h1 class="theme-hero__title">載入中…</h1>
+          <p class="theme-hero__subtitle"></p>
+        </div>
       </div>
-      <div class="featured__grid">
-        <!-- Injected by JS -->
-      </div>
-    </section>
 
-    <!-- 4 主題策展 -->
-    <main id="portfolio" aria-label="主題策展">
-      <div class="portfolio__header container">
-        <span class="section-label">主題策展</span>
-        <h2>依主題探索</h2>
+      <!-- Works grid -->
+      <div class="theme-works">
+        <div class="theme-works__grid">
+          <!-- Injected by JS -->
+        </div>
       </div>
-      <!-- Curation blocks injected by JS -->
+
     </main>
-
-    <!-- 所有作品 -->
-    <section id="all-works" aria-label="所有作品">
-      <div class="all-works__header container">
-        <span class="section-label">所有作品</span>
-        <h2>完整作品列表</h2>
-      </div>
-      <div class="all-works__grid">
-        <!-- Injected by JS -->
-      </div>
-    </section>
 
     <section id="contact" class="contact" aria-label="聯絡我們">
       <div class="contact__inner">
@@ -97,10 +77,6 @@
         <img src="/logo.png" alt="Woolito Animation" />
       </div>
       <p class="footer__copy">© 2024 Woolito Animation. All rights reserved.</p>
-      <div class="footer__social">
-        <a href="#" target="_blank" rel="noopener">Instagram</a>
-        <a href="#" target="_blank" rel="noopener">YouTube</a>
-      </div>
     </footer>
 
     <div id="video-modal" class="video-modal" role="dialog" aria-modal="true" aria-label="影片播放">
@@ -111,6 +87,6 @@
       </div>
     </div>
 
-    <script type="module" src="/src/portfolio-main.ts"></script>
+    <script type="module" src="/src/portfolio-theme-main.ts"></script>
   </body>
 </html>
