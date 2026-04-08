@@ -5,6 +5,7 @@ export function initContactSection() {
   if (!section) return
 
   const textEl = section.querySelector<HTMLElement>('.contact__text')
+  const formEl = section.querySelector<HTMLElement>('.contact__form-wrap')
   const linksEl = section.querySelector<HTMLElement>('.contact__links')
 
   ScrollTrigger.create({
@@ -15,8 +16,9 @@ export function initContactSection() {
       if (textEl) {
         gsap.to(textEl, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' })
       }
-      if (linksEl) {
-        gsap.to(linksEl, { opacity: 1, y: 0, duration: 0.7, delay: 0.15, ease: 'power3.out' })
+      const rightEl = formEl ?? linksEl
+      if (rightEl) {
+        gsap.to(rightEl, { opacity: 1, y: 0, duration: 0.7, delay: 0.15, ease: 'power3.out' })
       }
     },
   })

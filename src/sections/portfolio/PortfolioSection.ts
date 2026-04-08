@@ -6,7 +6,7 @@ export function initPortfolioSection() {
   if (!container) return
 
   portfolioThemes.forEach((theme) => {
-    const block = createCurationBlock(theme)
+    const block = createCurationBlock(theme, 4)
     container.appendChild(block)
   })
 }

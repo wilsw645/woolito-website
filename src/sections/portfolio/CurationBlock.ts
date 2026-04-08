@@ -5,7 +5,7 @@ import type { CurationTheme } from '@/types'
 import { createWorkCard } from './WorkCard'
 import { gsap, ScrollTrigger } from '@/animation/gsap-config'
 
-export function createCurationBlock(theme: CurationTheme): HTMLElement {
+export function createCurationBlock(theme: CurationTheme, maxCards?: number): HTMLElement {
   const section = document.createElement('section')
   section.className = 'curation'
   section.id = theme.id
@@ -27,7 +27,8 @@ export function createCurationBlock(theme: CurationTheme): HTMLElement {
   `
 
   const wrapper = section.querySelector('.swiper-wrapper')!
-  theme.cards.forEach((card) => {
+  const cards = maxCards !== undefined ? theme.cards.slice(0, maxCards) : theme.cards
+  cards.forEach((card) => {
     const cardEl = createWorkCard(card)
     wrapper.appendChild(cardEl)
   })
@@ -52,7 +53,7 @@ export function createCurationBlock(theme: CurationTheme): HTMLElement {
 
   // Scroll entrance animations
   const titleEl = section.querySelector<HTMLElement>('.curation__title')!
-  const cards = section.querySelectorAll<HTMLElement>('.work-card')
+  const cardEls = section.querySelectorAll<HTMLElement>('.work-card')
 
   ScrollTrigger.create({
     trigger: section,
@@ -60,7 +61,7 @@ export function createCurationBlock(theme: CurationTheme): HTMLElement {
     once: true,
     onEnter: () => {
       gsap.to(titleEl, { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' })
-      gsap.to(cards, {
+      gsap.to(cardEls, {
         opacity: 1,
         y: 0,
         stagger: 0.08,

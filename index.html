@@ -22,8 +22,8 @@
       </a>
       <nav class="navbar__nav" aria-label="主選單">
         <a href="/portfolio.html" class="navbar__link">作品集</a>
-        <a href="#contact" class="navbar__link">聯絡我們</a>
-        <a href="#contact" class="navbar__cta">開始合作</a>
+        <a href="/contact.html" class="navbar__link">聯絡我們</a>
+        <a href="/contact.html" class="navbar__cta">開始合作</a>
       </nav>
     </header>
 
@@ -99,29 +99,47 @@
             告訴我們你的想法，<br />
             我們來把它變成讓人印象深刻的動畫。
           </p>
-        </div>
-        <div class="contact__links">
-          <div class="contact__item">
-            <div class="contact__icon">✉️</div>
-            <div class="contact__item-text">
-              <h4>Email</h4>
-              <a href="mailto:contact@woolito.com">contact@woolito.com</a>
-            </div>
-          </div>
-          <div class="contact__item">
+          <div class="contact__channel">
             <div class="contact__icon">💬</div>
             <div class="contact__item-text">
               <h4>LINE 官方帳號</h4>
               <a href="https://line.me/R/ti/p/@woolito" target="_blank" rel="noopener">@woolito</a>
             </div>
           </div>
-          <div class="contact__item">
-            <div class="contact__icon">🎬</div>
-            <div class="contact__item-text">
-              <h4>作品集</h4>
-              <a href="/portfolio.html">瀏覽完整作品</a>
+        </div>
+        <div class="contact__form-wrap">
+          <form class="contact-form" action="#" onsubmit="return false;">
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="cf-name">姓名</label>
+                <input type="text" id="cf-name" name="name" placeholder="王小明" />
+              </div>
+              <div class="contact-form__field">
+                <label for="cf-company">公司 / 品牌</label>
+                <input type="text" id="cf-company" name="company" placeholder="Woolito Animation" />
+              </div>
             </div>
-          </div>
+            <div class="contact-form__field">
+              <label for="cf-email">Email</label>
+              <input type="email" id="cf-email" name="email" placeholder="hello@example.com" />
+            </div>
+            <div class="contact-form__field">
+              <label for="cf-type">專案類型</label>
+              <select id="cf-type" name="type">
+                <option value="">請選擇...</option>
+                <option>永續報告書動畫</option>
+                <option>品牌形象影片</option>
+                <option>產品說明動畫</option>
+                <option>政令宣導影片</option>
+                <option>其他</option>
+              </select>
+            </div>
+            <div class="contact-form__field">
+              <label for="cf-message">說說你的想法</label>
+              <textarea id="cf-message" name="message" rows="4" placeholder="想做什麼類型的動畫？預算、時程有什麼需求？"></textarea>
+            </div>
+            <button type="submit" class="contact-form__submit">送出需求 →</button>
+          </form>
         </div>
       </div>
     </section>

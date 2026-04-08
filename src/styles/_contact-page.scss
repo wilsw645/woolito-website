@@ -1,0 +1,155 @@
+@use 'variables' as *;
+
+// ── Contact Page Hero ────────────────────────────────────────
+.contact-page__hero {
+  padding: 140px clamp(20px, 5vw, 80px) 60px;
+  background: $color-bg;
+  max-width: $container-max;
+  margin: 0 auto;
+
+  h1 {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-top: 12px;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: rgba($color-text, 0.55);
+    line-height: 1.7;
+  }
+}
+
+// ── Contact Page Body ────────────────────────────────────────
+.contact-page__body {
+  background: $color-gray-800;
+  padding: 80px clamp(20px, 5vw, 80px) 120px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 30%;
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba($color-primary, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+.contact-page__inner {
+  max-width: $container-max;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 80px;
+  align-items: start;
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+}
+
+// ── Form Column ──────────────────────────────────────────────
+.contact-page__form-title {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+}
+
+.contact-form--lg {
+  .contact-form__field textarea {
+    min-height: 140px;
+  }
+}
+
+.required {
+  color: $color-primary;
+  font-weight: 700;
+}
+
+.contact-form__note {
+  font-size: 0.8rem;
+  color: rgba($color-text, 0.3);
+  margin-top: 4px;
+}
+
+// ── Info Column ──────────────────────────────────────────────
+.contact-page__info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 100px;
+}
+
+.contact-page__info-card {
+  background: rgba($color-gray-700, 0.4);
+  border: 1px solid rgba($color-gray-600, 0.3);
+  border-radius: 16px;
+  padding: 28px;
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  > p {
+    font-size: 0.9rem;
+    color: rgba($color-text, 0.55);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+}
+
+.contact-page__channels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-page__channel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 10px;
+  background: rgba($color-gray-800, 0.6);
+  border: 1px solid rgba($color-gray-600, 0.3);
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    border-color: rgba($color-primary, 0.4);
+    background: rgba($color-gray-700, 0.8);
+
+    .contact__item-text p {
+      color: $color-primary;
+    }
+  }
+}
+
+.contact-page__tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  li {
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba($color-primary, 0.1);
+    color: rgba($color-primary, 0.8);
+    border: 1px solid rgba($color-primary, 0.2);
+  }
+}

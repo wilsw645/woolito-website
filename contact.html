@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>聯絡我們 — Woolito Animation</title>
+    <meta name="description" content="與 Woolito Animation 開始合作，告訴我們你的品牌故事，我們來把它變成讓人印象深刻的動畫。" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+
+    <header class="navbar" role="banner">
+      <a href="/" class="navbar__logo" aria-label="Woolito Animation 首頁">
+        <img src="/logo.png" alt="Woolito Animation" />
+      </a>
+      <nav class="navbar__nav" aria-label="主選單">
+        <a href="/portfolio.html" class="navbar__link">作品集</a>
+        <a href="/contact.html" class="navbar__link">聯絡我們</a>
+        <a href="/contact.html" class="navbar__cta">開始合作</a>
+      </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div class="contact-page__hero">
+      <span class="section-label">聯絡我們</span>
+      <h1>準備好讓你的<br />品牌動起來了嗎？</h1>
+      <p>告訴我們你的想法，我們來把它變成讓人印象深刻的動畫。</p>
+    </div>
+
+    <!-- Main Contact Area -->
+    <section class="contact-page__body">
+      <div class="contact-page__inner">
+
+        <!-- Left: Form -->
+        <div class="contact-page__form-col">
+          <h2 class="contact-page__form-title">填寫需求單</h2>
+          <form class="contact-form contact-form--lg" action="#" onsubmit="return false;">
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="cp-name">姓名 <span class="required">*</span></label>
+                <input type="text" id="cp-name" name="name" placeholder="王小明" required />
+              </div>
+              <div class="contact-form__field">
+                <label for="cp-company">公司 / 品牌</label>
+                <input type="text" id="cp-company" name="company" placeholder="Woolito Animation" />
+              </div>
+            </div>
+            <div class="contact-form__field">
+              <label for="cp-email">Email <span class="required">*</span></label>
+              <input type="email" id="cp-email" name="email" placeholder="hello@example.com" required />
+            </div>
+            <div class="contact-form__field">
+              <label for="cp-phone">聯絡電話</label>
+              <input type="tel" id="cp-phone" name="phone" placeholder="0912-345-678" />
+            </div>
+            <div class="contact-form__field">
+              <label for="cp-type">專案類型 <span class="required">*</span></label>
+              <select id="cp-type" name="type" required>
+                <option value="">請選擇...</option>
+                <option>永續報告書動畫</option>
+                <option>品牌形象影片</option>
+                <option>產品說明動畫</option>
+                <option>政令宣導影片</option>
+                <option>社群短影音</option>
+                <option>其他</option>
+              </select>
+            </div>
+            <div class="contact-form__row">
+              <div class="contact-form__field">
+                <label for="cp-budget">預算範圍</label>
+                <select id="cp-budget" name="budget">
+                  <option value="">請選擇...</option>
+                  <option>5 萬以下</option>
+                  <option>5–15 萬</option>
+                  <option>15–30 萬</option>
+                  <option>30 萬以上</option>
+                </select>
+              </div>
+              <div class="contact-form__field">
+                <label for="cp-deadline">期望完成時間</label>
+                <input type="text" id="cp-deadline" name="deadline" placeholder="e.g. 2024 Q3" />
+              </div>
+            </div>
+            <div class="contact-form__field">
+              <label for="cp-message">說說你的想法 <span class="required">*</span></label>
+              <textarea id="cp-message" name="message" rows="5" placeholder="想做什麼類型的動畫？有什麼特別需求或參考範例嗎？" required></textarea>
+            </div>
+            <button type="submit" class="contact-form__submit">送出需求 →</button>
+            <p class="contact-form__note">* 為必填欄位。我們會在 2 個工作天內回覆您。</p>
+          </form>
+        </div>
+
+        <!-- Right: Info -->
+        <div class="contact-page__info-col">
+          <div class="contact-page__info-card">
+            <h3>直接聯絡我們</h3>
+            <p>不想填表單？也歡迎直接透過以下方式聯繫，快速溝通你的想法。</p>
+            <div class="contact-page__channels">
+              <a href="mailto:contact@woolito.com" class="contact-page__channel">
+                <div class="contact__icon">✉️</div>
+                <div class="contact__item-text">
+                  <h4>Email</h4>
+                  <p>contact@woolito.com</p>
+                </div>
+              </a>
+              <a href="https://line.me/R/ti/p/@woolito" target="_blank" rel="noopener" class="contact-page__channel">
+                <div class="contact__icon">💬</div>
+                <div class="contact__item-text">
+                  <h4>LINE 官方帳號</h4>
+                  <p>@woolito</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-page__info-card">
+            <h3>我們擅長的領域</h3>
+            <ul class="contact-page__tags">
+              <li>永續 ESG 報告書動畫</li>
+              <li>老品牌形象再造</li>
+              <li>產品說明動畫</li>
+              <li>政令宣導影片</li>
+              <li>社群行銷素材</li>
+              <li>品牌故事短片</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__logo">
+        <img src="/logo.png" alt="Woolito Animation" />
+      </div>
+      <p class="footer__copy">© 2024 Woolito Animation. All rights reserved.</p>
+      <div class="footer__social">
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/contact-main.ts"></script>
+  </body>
+</html>
