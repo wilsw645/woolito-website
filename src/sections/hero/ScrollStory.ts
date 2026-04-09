@@ -12,19 +12,19 @@ export function initScrollStory(container: HTMLElement) {
   const mktShapes = MKT_SHAPES.map(def => canvas.querySelector<HTMLElement>(`#${def.id}`)!).filter(Boolean)
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
   if (prefersReduced) {
     gsap.set([sceneEls, text1, text2], { opacity: 1 })
     return
   }
 
-  // Initial state
+  // ── Initial state ───────────────────────────────────────────
+  // Elements start BIG and far offscreen
   ELEMENTS.forEach((def, i) => {
     const el = sceneEls[i]
     if (!el) return
     gsap.set(el, {
-      xPercent: def.ix,
-      yPercent: def.iy,
+      x: def.ix,
+      y: def.iy,
       rotation: def.ir,
       scale: def.is,
       opacity: 0,
@@ -32,68 +32,49 @@ export function initScrollStory(container: HTMLElement) {
   })
 
   gsap.set(mktShapes, { scale: 0, opacity: 0 })
-  gsap.set(text1, { opacity: 1, y: 0 })  // 進入頁面就可見
+  gsap.set(text1, { opacity: 1, y: 0 })
   gsap.set(text2, { opacity: 0, y: 40 })
 
   const tl = gsap.timeline({ paused: true })
 
-  // ─────────────────────────────────────────────────────────────
-  // ACT 1 (0–20%): Elements fly in from offscreen
-  // ─────────────────────────────────────────────────────────────
+  // ── ACT 1-2 (0–68%): Elements fly in from far, big→small, converge to center ──
+  // Stagger so they don't all arrive at the exact same time
+  const staggerConfig = { each: 0.015, from: 'random' as const }
+
+  // Quick opacity fade-in as each element enters
   tl.to(sceneEls, {
-    xPercent: (i) => ELEMENTS[i]?.cx ?? 0,
-    yPercent: (i) => ELEMENTS[i]?.cy ?? 0,
-    rotation: (i) => ELEMENTS[i]?.cr ?? 0,
-    scale: 1,
     opacity: 1,
-    stagger: { each: 0.02, from: 'random' },
-    ease: 'power2.out',
-    duration: 0.20,
+    duration: 0.08,
+    stagger: staggerConfig,
+    ease: 'none',
   }, 0)
 
-  tl.to(scrollHint, { opacity: 0, duration: 0.05 }, 0.02)
-
-  // ─────────────────────────────────────────────────────────────
-  // ACT 2 (20–50%): Elements converge to center
-  // ─────────────────────────────────────────────────────────────
+  // Main convergence: position → center, scale → 0, rotation → 0
   tl.to(sceneEls, {
-    xPercent: (i) => (ELEMENTS[i]?.cx ?? 0) * 0.3,
-    yPercent: (i) => (ELEMENTS[i]?.cy ?? 0) * 0.3,
+    x: 0,
+    y: 0,
     rotation: 0,
-    stagger: { each: 0.015, from: 'edges' },
-    ease: 'converge',
-    duration: 0.28,
-  }, 0.20)
-
-  // Text 1 fades out as elements fly in
-  tl.to(text1, { opacity: 0, y: -40, ease: 'power2.in', duration: 0.12 }, 0.15)
-
-  // ─────────────────────────────────────────────────────────────
-  // ACT 3 (50–65%): Elements cluster and disappear
-  // ─────────────────────────────────────────────────────────────
-  tl.to(sceneEls, {
-    xPercent: 0,
-    yPercent: 0,
     scale: 0,
-    opacity: 0,
-    stagger: { each: 0.01, from: 'center' },
-    ease: 'power3.in',
-    duration: 0.14,
-  }, 0.50)
+    stagger: staggerConfig,
+    ease: 'power2.in',   // slow start (big & far), accelerates into center
+    duration: 0.58,
+  }, 0)
 
-  // ─────────────────────────────────────────────────────────────
-  // ACT 4 (65–78%): Text 2 fades in
-  // ─────────────────────────────────────────────────────────────
+  // Scroll hint fades out immediately
+  tl.to(scrollHint, { opacity: 0, duration: 0.06 }, 0.02)
+
+  // Text 1 fades while elements are mid-journey
+  tl.to(text1, { opacity: 0, y: -40, ease: 'power2.in', duration: 0.10 }, 0.28)
+
+  // ── ACT 3 (68–78%): Text 2 reveals after elements disappear ──
   tl.fromTo(text2,
     { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, ease: 'power2.out', duration: 0.10 },
-    0.65,
+    { opacity: 1, y: 0, ease: 'power2.out', duration: 0.08 },
+    0.68,
   )
 
-  // ─────────────────────────────────────────────────────────────
-  // ACT 5 (78–100%): Marketing shapes explode outward
-  // ─────────────────────────────────────────────────────────────
-  tl.to(text2, { opacity: 0, duration: 0.05 }, 0.76)
+  // ── ACT 4 (78–100%): Marketing shapes explode outward ────────
+  tl.to(text2, { opacity: 0, duration: 0.04 }, 0.76)
 
   MKT_SHAPES.forEach((def, i) => {
     const el = mktShapes[i]
@@ -115,17 +96,13 @@ export function initScrollStory(container: HTMLElement) {
 
   tl.to(text2, { opacity: 1, y: 0, ease: 'power2.out', duration: 0.08 }, 0.82)
 
-  // ─────────────────────────────────────────────────────────────
-  // ScrollTrigger: pin canvas, drive timeline with scroll
-  // ─────────────────────────────────────────────────────────────
+  // ── ScrollTrigger: pin canvas, drive timeline ─────────────────
   ScrollTrigger.create({
     trigger: container,
     start: 'top top',
     end: 'bottom bottom',
     pin: canvas,
     scrub: 1.5,
-    onUpdate: (self) => {
-      tl.progress(self.progress)
-    },
+    onUpdate: (self) => tl.progress(self.progress),
   })
 }

@@ -63,6 +63,36 @@
     }
   }
 
+  // ── Hamburger button (desktop: hidden) ────────────────────────
+  &__hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    background: none;
+    border: none;
+    z-index: 102;
+    flex-shrink: 0;
+  }
+
+  &__ham-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: $color-text;
+    border-radius: 2px;
+    transition: transform 0.25s $ease-out, opacity 0.2s;
+  }
+
+  // Hamburger → X when open
+  &.menu-open {
+    .navbar__ham-line:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .navbar__ham-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .navbar__ham-line:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  }
+
+  // ── Mobile ─────────────────────────────────────────────────────
   @media (max-width: $bp-tablet) {
     padding: 16px 20px;
 
@@ -70,12 +100,62 @@
       padding: 12px 20px;
     }
 
+    &__hamburger {
+      display: flex;
+    }
+
     &__nav {
-      gap: 20px;
+      // Hidden by default on mobile; becomes fullscreen panel when open
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 101;
+      background: rgba($color-gray-900, 0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    &.menu-open .navbar__nav {
+      display: flex;
+      animation: mobile-nav-in 0.25s $ease-out forwards;
     }
 
     &__link {
-      display: none;
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: rgba($color-text, 0.85);
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+
+    &__cta {
+      padding: 14px 36px;
+      font-size: 1rem;
     }
   }
+}
+
+// Mobile nav backdrop
+.mobile-nav-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+
+  &.is-visible {
+    display: block;
+  }
+}
+
+@keyframes mobile-nav-in {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
