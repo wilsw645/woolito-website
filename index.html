@@ -31,26 +31,23 @@
     <section id="hero" class="hero-scroll-container" aria-label="品牌動畫展示">
       <div class="hero-canvas">
 
+        <!-- Vimeo background video (autoplay, loop, muted) -->
+        <div class="hero-video-bg" aria-hidden="true">
+          <iframe
+            src="https://player.vimeo.com/video/1107353149?h=fa96e95a56&background=1&autoplay=1&loop=1&muted=1&byline=0&title=0&portrait=0"
+            frameborder="0"
+            allow="autoplay; fullscreen"
+          ></iframe>
+        </div>
+        <!-- Dark overlay -->
+        <div class="hero-overlay" aria-hidden="true"></div>
+
         <!-- Floating SVG/shape elements (injected by JS) -->
         <div class="hero-scene" aria-hidden="true"></div>
 
-        <!-- Center video screen -->
-        <div class="video-screen" aria-hidden="true">
-          <div class="video-screen__placeholder">
-            <div class="play-icon"></div>
-            <span>Woolito Reel</span>
-          </div>
-          <!-- Replace with actual video:
-          <video muted loop playsinline preload="metadata">
-            <source src="/videos/hero-reel.webm" type="video/webm" />
-            <source src="/videos/hero-reel.mp4" type="video/mp4" />
-          </video>
-          -->
-        </div>
-
         <!-- Marketing shape placeholders (injected by JS) -->
 
-        <!-- Text overlay 1: during convergence -->
+        <!-- Text overlay 1: on page load -->
         <div class="hero-text hero-text--1" aria-hidden="true">
           <p class="hero-text__main">
             我們可以將您的<em>產品、服務、資訊</em><br />

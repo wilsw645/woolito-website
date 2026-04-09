@@ -4,25 +4,21 @@ import { ELEMENTS, MKT_SHAPES } from './SceneElements'
 export function initScrollStory(container: HTMLElement) {
   const canvas = container.querySelector<HTMLElement>('.hero-canvas')!
   const scene = container.querySelector<HTMLElement>('.hero-scene')!
-  const videoScreen = container.querySelector<HTMLElement>('.video-screen')!
-  const video = videoScreen.querySelector('video')
   const text1 = container.querySelector<HTMLElement>('.hero-text--1')!
   const text2 = container.querySelector<HTMLElement>('.hero-text--2')!
   const scrollHint = container.querySelector<HTMLElement>('.scroll-hint')!
 
-  // Gather elements
   const sceneEls = ELEMENTS.map(def => scene.querySelector<HTMLElement>(`#${def.id}`)!).filter(Boolean)
   const mktShapes = MKT_SHAPES.map(def => canvas.querySelector<HTMLElement>(`#${def.id}`)!).filter(Boolean)
 
-  // Skip heavy animations on reduced motion
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   if (prefersReduced) {
-    gsap.set([sceneEls, text1, text2, videoScreen], { opacity: 1 })
+    gsap.set([sceneEls, text1, text2], { opacity: 1 })
     return
   }
 
-  // Initial state: all elements invisible at their offscreen positions
+  // Initial state
   ELEMENTS.forEach((def, i) => {
     const el = sceneEls[i]
     if (!el) return
@@ -35,16 +31,14 @@ export function initScrollStory(container: HTMLElement) {
     })
   })
 
-  gsap.set(videoScreen, { scale: 0, opacity: 0 })
   gsap.set(mktShapes, { scale: 0, opacity: 0 })
-  gsap.set(text1, { opacity: 1, y: 0 })  // 進入頁面就可見，不等 scroll
+  gsap.set(text1, { opacity: 1, y: 0 })  // 進入頁面就可見
   gsap.set(text2, { opacity: 0, y: 40 })
 
-  // Master timeline (progress 0→1 driven by scroll)
   const tl = gsap.timeline({ paused: true })
 
   // ─────────────────────────────────────────────────────────────
-  // ACT 1 (0–20%): Elements scatter in from offscreen
+  // ACT 1 (0–20%): Elements fly in from offscreen
   // ─────────────────────────────────────────────────────────────
   tl.to(sceneEls, {
     xPercent: (i) => ELEMENTS[i]?.cx ?? 0,
@@ -57,7 +51,6 @@ export function initScrollStory(container: HTMLElement) {
     duration: 0.20,
   }, 0)
 
-  // Fade out scroll hint
   tl.to(scrollHint, { opacity: 0, duration: 0.05 }, 0.02)
 
   // ─────────────────────────────────────────────────────────────
@@ -72,15 +65,11 @@ export function initScrollStory(container: HTMLElement) {
     duration: 0.28,
   }, 0.20)
 
-  // Text 1 已在畫面上（gsap.set opacity:1），scroll 開始後隨元素飛入一起淡出
-  // 在 Act 1 尾段（約 15%）開始淡出，元素還在飛的時候文字就退場
-  tl.to(text1,
-    { opacity: 0, y: -40, ease: 'power2.in', duration: 0.12 },
-    0.15,
-  )
+  // Text 1 fades out as elements fly in
+  tl.to(text1, { opacity: 0, y: -40, ease: 'power2.in', duration: 0.12 }, 0.15)
 
   // ─────────────────────────────────────────────────────────────
-  // ACT 3 (50–65%): Elements cluster + video screen reveals
+  // ACT 3 (50–65%): Elements cluster and disappear
   // ─────────────────────────────────────────────────────────────
   tl.to(sceneEls, {
     xPercent: 0,
@@ -92,42 +81,20 @@ export function initScrollStory(container: HTMLElement) {
     duration: 0.14,
   }, 0.50)
 
-  // （text1 已在 0.15 淡出，這裡不需要重複）
-
-  // Video screen bursts out
-  tl.fromTo(videoScreen,
-    { scale: 0.05, opacity: 0 },
-    { scale: 1, opacity: 1, ease: 'expo.out', duration: 0.14 },
-    0.54,
-  )
-
   // ─────────────────────────────────────────────────────────────
-  // ACT 4 (65–75%): Video holds, text 2 fades in
+  // ACT 4 (65–78%): Text 2 fades in
   // ─────────────────────────────────────────────────────────────
-  // Autoplay video when it's visible (muted, required by browsers)
-  if (video) {
-    tl.add(() => { video.play().catch(() => {}) }, 0.65)
-  }
-
   tl.fromTo(text2,
     { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, ease: 'power2.out', duration: 0.08 },
-    0.78,
+    { opacity: 1, y: 0, ease: 'power2.out', duration: 0.10 },
+    0.65,
   )
 
   // ─────────────────────────────────────────────────────────────
-  // ACT 5 (75–100%): Video retracts, marketing shapes fly out
+  // ACT 5 (78–100%): Marketing shapes explode outward
   // ─────────────────────────────────────────────────────────────
-  tl.to(videoScreen, {
-    scale: 0.2,
-    opacity: 0,
-    ease: 'power3.in',
-    duration: 0.08,
-  }, 0.76)
-
   tl.to(text2, { opacity: 0, duration: 0.05 }, 0.76)
 
-  // Marketing shapes explode outward
   MKT_SHAPES.forEach((def, i) => {
     const el = mktShapes[i]
     if (!el) return
@@ -146,7 +113,6 @@ export function initScrollStory(container: HTMLElement) {
     )
   })
 
-  // Final text 2 back in with new message context
   tl.to(text2, { opacity: 1, y: 0, ease: 'power2.out', duration: 0.08 }, 0.82)
 
   // ─────────────────────────────────────────────────────────────

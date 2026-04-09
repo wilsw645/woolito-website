@@ -16,17 +16,44 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: $color-bg;
+  }
 
-    background: radial-gradient(
-      ellipse at center,
-      rgba($color-gray-800, 0.8) 0%,
-      $color-bg 70%
-    );
+  // Vimeo background video — covers full viewport like object-fit: cover
+  &-video-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+
+    iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      // Cover the viewport at 16:9
+      width: 100vw;
+      height: 56.25vw;   // 100 / (16/9)
+      min-height: 100vh;
+      min-width: 177.78vh; // 100 * (16/9)
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      border: 0;
+    }
+  }
+
+  // Dark overlay on top of video
+  &-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.52);
+    pointer-events: none;
   }
 
   &-scene {
     position: absolute;
     inset: 0;
+    z-index: 2;
     pointer-events: none;
   }
 }
@@ -144,6 +171,7 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  z-index: 3;
 
   &--social {
     width: 140px;
@@ -203,6 +231,7 @@
   pointer-events: none;
   width: min(600px, 90vw);
   will-change: opacity, transform;
+  z-index: 3;
 
   &__main {
     font-size: clamp(1.5rem, 4vw, 2.8rem);
@@ -247,6 +276,7 @@
   gap: 8px;
   opacity: 1;
   will-change: opacity;
+  z-index: 3;
 
   span {
     font-size: 0.75rem;
