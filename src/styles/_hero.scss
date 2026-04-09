@@ -17,6 +17,19 @@
     align-items: center;
     justify-content: center;
     background: $color-bg;
+
+    // Gradient guard at top so video doesn't bleed into navbar
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 140px;
+      background: linear-gradient(to bottom, rgba($color-bg, 0.85) 0%, transparent 100%);
+      z-index: 4;
+      pointer-events: none;
+    }
   }
 
   // Vimeo background video — covers full viewport like object-fit: cover
