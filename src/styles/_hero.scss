@@ -233,16 +233,15 @@
   }
 }
 
-// Text overlays
+// Text overlays — centering handled by GSAP xPercent/yPercent, not CSS transform
 .hero-text {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
   text-align: center;
   opacity: 0;
   pointer-events: none;
-  width: min(600px, 90vw);
+  width: min(560px, 88vw);
   will-change: opacity, transform;
   z-index: 3;
 
@@ -267,13 +266,11 @@
   }
 
   &--1 {
-    top: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 1;   // 預設可見，GSAP 在 scroll 前不動它
+    opacity: 1;
   }
 
   &--2 {
-    // positioned at center during explosion phase
+    // positioned at center; GSAP handles xPercent/yPercent centering
   }
 }
 

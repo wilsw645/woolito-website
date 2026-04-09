@@ -32,8 +32,9 @@ export function initScrollStory(container: HTMLElement) {
   })
 
   gsap.set(mktShapes, { scale: 0, opacity: 0 })
-  gsap.set(text1, { opacity: 1, y: 0 })
-  gsap.set(text2, { opacity: 0, y: 40 })
+  // xPercent/yPercent centres each text without GSAP overwriting the CSS transform
+  gsap.set(text1, { xPercent: -50, yPercent: -50, opacity: 1 })
+  gsap.set(text2, { xPercent: -50, yPercent: -50, opacity: 0, y: 40 })
 
   const tl = gsap.timeline({ paused: true })
 
@@ -67,8 +68,7 @@ export function initScrollStory(container: HTMLElement) {
   tl.to(text1, { opacity: 0, y: -40, ease: 'power2.in', duration: 0.10 }, 0.28)
 
   // ── ACT 3 (68–78%): Text 2 reveals after elements disappear ──
-  tl.fromTo(text2,
-    { opacity: 0, y: 30 },
+  tl.to(text2,
     { opacity: 1, y: 0, ease: 'power2.out', duration: 0.08 },
     0.68,
   )
